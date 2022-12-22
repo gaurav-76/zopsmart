@@ -1,0 +1,23 @@
+
+tc n sc 1
+
+ ListNode* middleNode(ListNode* head) {
+        
+        if(head==nullptr || head->next==nullptr) return head;
+        
+        ListNode* slow=head;
+        ListNode* fast=head;
+        
+        
+        while(fast->next!=nullptr)// && fast!=nullptr)
+        {
+            slow = slow->next;
+          
+            fast = fast->next;
+            if(fast->next!=nullptr) fast = fast->next;
+           
+        }
+        
+        return slow;
+        
+    }

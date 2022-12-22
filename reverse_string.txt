@@ -1,0 +1,118 @@
+
+reverse string
+tc n sc 1
+
+int main()
+{
+    int i,n;
+    string str = "TutorJoes";
+    n=str.length();
+    for (i=0;i<n/2;i++)
+    {
+        swap(str[i],str[n-i-1]);
+    }
+    cout<<"\nAfter reversing string"<<str;
+    return 0;
+}
+
+
+reverse word in sring 
+
+
+tc n   sc n
+
+string RevString(string s[], int l)
+{
+    // Check if number of words is even
+    if (l % 2 == 0) {
+        // Find the middle word
+        int j = l / 2;
+ 
+        // Starting from the middle
+        // start swapping words at
+        // jth position and l-1-j position
+        while (j <= l - 1) {
+            string temp;
+            temp = s[l - j - 1];
+            s[l - j - 1] = s[j];
+            s[j] = temp;
+            j += 1;
+        }
+    }
+ 
+    // Check if number of words is odd
+    else {
+        // Find the middle word
+        int j = (l / 2) + 1;
+ 
+        // Starting from the middle start
+        // swapping the words at jth
+        // position and l-1-j position
+        while (j <= l - 1) {
+            string temp;
+            temp = s[l - j - 1];
+            s[l - j - 1] = s[j];
+            s[j] = temp;
+            j += 1;
+        }
+    }
+ 
+    string S = s[0];
+ 
+    // Return the reversed sentence
+    for (int i = 1; i < 9; i++) {
+        S = S + " " + s[i];
+    }
+    return S;
+}
+
+
+
+
+tc n2  sc 1
+
+void reversed(string& s, int l, int r)
+{
+ 
+    while (l < r) {
+ 
+        swap(s[l], s[r]);
+        l++;
+        r--;
+    }
+}
+ 
+// Function to reverse the given string
+string reverseString(string str)
+{
+ 
+    // Add space at the end so that the
+    // last word is also reversed
+    str.insert(str.end(), ' ');
+ 
+    int n = str.length();
+ 
+    int j = 0;
+ 
+    
+    for (int i = 0; i < n; i++) {
+ 
+        
+        if (str[i] == ' ') {
+ 
+            
+            reversed(str, j, i - 1);
+ 
+            
+            j = i + 1;
+        }
+    }
+ 
+   
+    str.pop_back();
+ 
+    reversed(str, 0, str.length() - 1);
+ 
+    
+    return str;
+}

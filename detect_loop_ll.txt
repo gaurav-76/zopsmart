@@ -1,0 +1,60 @@
+
+// detection
+
+ bool hasCycle(ListNode *head) {
+        
+        ListNode *p=head;
+        ListNode *q=head;
+        
+        if(head==NULL || head->next==NULL)return false;
+        
+        
+        do
+        {
+            p=p->next;
+            q=q->next;
+            
+            q = q!=NULL ? q->next : NULL;
+            
+        }while(p!=NULL && q!=NULL && p!=q);
+        
+        if(p==q)return true;
+        else return false;
+    
+}
+
+
+// return cycle node
+ ListNode *detectCycle(ListNode *head) {
+        
+        if(!head) return nullptr;
+        
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* prev = head;
+        bool flag = false;
+        while(fast->next && fast->next->next)
+        {
+            slow = slow->next;
+            fast = fast->next;
+            if(fast->next)
+            {
+                fast = fast->next;
+            }
+            
+            if(slow==fast)
+            {
+               while(slow!=prev)
+               {
+                   slow = slow->next;
+                   prev = prev->next;
+               }
+                return prev;
+            }
+        
+          // return nullptr;  
+        }
+        return nullptr; 
+       
+        
+    }

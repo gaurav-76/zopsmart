@@ -1,0 +1,79 @@
+
+tc n sc 1
+
+ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+        ListNode* before = dummy;
+        ListNode* after = head;
+        ListNode* curr = nullptr;
+        ListNode* prev = nullptr;
+        ListNode* nxt = nullptr;
+        while(true){
+            ListNode* cursor = after;
+            for(int i = 0; i < k; i++){
+                if(cursor == nullptr) return dummy->next;
+                cursor = cursor->next;
+            }
+            curr = after;
+            prev = before;
+            for(int i = 0; i < k; i++){
+                nxt = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = nxt;
+            }
+            after->next = curr;
+            before->next = prev;
+            before = after;
+            after = curr;
+        }
+    }
+
+
+// tc n sc 1
+Node* reverse(Node* head, int k)
+{
+    // If head is NULL or K is 1 then return head
+    if (!head || k == 1)
+        return head;
+ 
+    Node* dummy = new Node(); // creating dummy node
+    dummy->data = -1;
+    dummy->next = head;
+ 
+    // Initializing three points prev, curr, next
+    Node *prev = dummy, *curr = dummy, *next = dummy;
+ 
+    int count = 0;
+    while (curr) {
+        curr = curr->next;
+        count++;
+    }
+ 
+    
+    while (next) {
+        // Curr position after every reverse group
+        curr = prev->next;
+        // Next will always next to curr
+        next = curr->next;
+        // toLoop will set to count - 1 in case of remaining
+        // element
+        int toLoop = count > k ? k : count - 1;
+        for (int i = 1; i < toLoop; i++) {
+            // 4 steps as discussed above
+            curr->next = next->next;
+            next->next = prev->next;
+            prev->next = next;
+            next = curr->next;
+        }
+        // Setting prev to curr
+        prev = curr;
+        // Update count
+        count -= k;
+    }
+    // dummy -> next will be our new head for output linked
+    // list
+    return dummy->next;
+}
+

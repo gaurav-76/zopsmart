@@ -1,0 +1,86 @@
+
+tc n sc n
+
+vector<vector<int>> findLocalMinimaAndMaxima(int *arr, int n)
+{
+
+	
+	vector<int> minima;
+
+	
+	vector<int> maxima;
+
+	
+	vector<vector<int>> result;
+
+	
+	if (arr[0] < arr[1])
+	{
+		minima.push_back(0);
+	}
+
+	else if (arr[0] > arr[1])
+	{
+		maxima.push_back(0);
+	}
+
+	//Traversing the array to find all the indices of local minima and local maxima
+	for (int i = 1; i < n - 1; i++)
+	{
+
+		int element = arr[i];
+
+		if (element < arr[i - 1] and element < arr[i + 1])
+		{
+			minima.push_back(i);
+		}
+
+		else if (element > arr[i - 1] and element > arr[i + 1])
+		{
+			maxima.push_back(i);
+		}
+	}
+
+	// Checking whether the last element is local maxima or minima or none.
+	if (arr[n - 1] < arr[n - 2])
+	{
+		minima.push_back(n - 1);
+	}
+
+	else if (arr[n - 1] > arr[n - 2])
+	{
+		maxima.push_back(n - 1);
+	}
+
+	if (minima.size() == 0)
+	{
+		minima.push_back(-1);
+	}
+	if (maxima.size() == 0)
+	{
+		maxima.push_back(-1);
+	}
+
+	//add local minima and local maxima lists to result
+	result.push_back(minima);
+	result.push_back(maxima);
+
+	return result;
+}
+
+
+The idea is to iterate through the given array and at each index i, we check its neighbors to check if it's local minima or maxima.
+
+ 
+
+Steps:
+
+ 
+
+We create two lists namely minima and maxima, to store all the indices of local minima and local maxima respectively.
+First, we check for the local maxima and minima conditions for the first element.
+Then we iterate through the given array from index 1 to N - 2, and at any index i, we do the following:
+If arr[i – 1] > arr[i] < arr[i + 1] then add index i to minima.
+If arr[i – 1] < arr[i] > arr[i + 1] then add index i to maxima.
+Then, we check for the local maxima and minima conditions for the last element.
+At last, we add both lists minima and maxima to answer and return the answer.
